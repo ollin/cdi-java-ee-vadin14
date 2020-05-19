@@ -35,7 +35,6 @@
         <version.yasson>1.0.5</version.yasson>
         <version.jaxb-api>2.3.1</version.jaxb-api>
         <version.openliberty.runtime>20.0.0.4</version.openliberty.runtime>
-        <version.liberty-maven-plugin>3.1</version.liberty-maven-plugin>
         <version.maven-failsafe-plugin>2.22.2</version.maven-failsafe-plugin>
         <version.maven-surefire-plugin>2.22.2</version.maven-surefire-plugin>
         <version.maven-war-plugin>3.2.3</version.maven-war-plugin>
@@ -47,6 +46,7 @@
         <version.lombok>1.18.12</version.lombok>
         <version.mapstruct>1.3.1.Final</version.mapstruct>
 
+        <version.liberty-maven-plugin>3.2</version.liberty-maven-plugin>
         <!-- Dependencies -->
         <vaadin.version>14.1.28</vaadin.version>
 
@@ -159,35 +159,19 @@
             <plugin>
                 <groupId>io.openliberty.tools</groupId>
                 <artifactId>liberty-maven-plugin</artifactId>
-                <version>${version.liberty-maven-plugin}</version>
+                <version>3.2</version>
+                <!-- tag::configuration[] -->
                 <configuration>
-                    <assemblyArtifact>
-                        <groupId>io.openliberty</groupId>
-                        <artifactId>openliberty-runtime</artifactId>
-                        <!-- Don't forget to update the openliberty-docker-image version in the docker module too -->
-                        <version>${version.openliberty.runtime}</version>
-                        <type>zip</type>
-                    </assemblyArtifact>
-                    <serverName>${project.artifactId}_Server</serverName>
-                    <applications>${artifactName}</applications>
-                    <configDirectory>src/main/liberty/config</configDirectory>
-                    <include>minify,runnable</include>
-                    <skipLibertyPackage>true</skipLibertyPackage>
-                    <skipTestServer>true</skipTestServer>
-                    <serverEnvFile>src/main/liberty/config/dev.env</serverEnvFile>
-                    <looseApplication>false</looseApplication>
-                    <serverStartTimeout>120</serverStartTimeout>
-                    <verifyTimeout>120</verifyTimeout>
+                    <!-- tag::serverName[] -->
+                    <serverName>guideServer</serverName>
+                    <!-- end::serverName[] -->
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>${version.maven-war-plugin}</version>
+                <!-- end::configuration[] -->
             </plugin>
             <plugin>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-maven-plugin</artifactId>
+                <version>${vaadin.version}</version>
                 <executions>
                     <execution>
                         <goals>
