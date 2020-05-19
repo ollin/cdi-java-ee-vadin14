@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.nautsch</groupId>
+    <artifactId>cdi-java-ee-vadin14</artifactId>
+    <name>cdi-java-ee-vadin14</name>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>war</packaging>
+
+    <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <failOnMissingWebXml>false</failOnMissingWebXml>
+
+        <artifactName>dada-web</artifactName>
+
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <failOnMissingWebXml>false</failOnMissingWebXml>
+
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>${maven.compiler.source}</maven.compiler.target>
+        <version.junit.jupiter>5.5.2</version.junit.jupiter>
+        <version.guava>29.0-jre</version.guava>
+        <version.assertj-core>3.11.1</version.assertj-core>
+        <version.junit-platform-launcher>1.5.2</version.junit-platform-launcher>
+        <version.mockito-core>3.2.4</version.mockito-core>
+        <version.mockito-junit-jupiter>3.2.4</version.mockito-junit-jupiter>
+        <version.httpclient>4.5.12</version.httpclient>
+        <version.jakarta.jakartaee-web-api>8.0.0</version.jakarta.jakartaee-web-api>
+        <version.cxf-rt-rs-client>3.3.4</version.cxf-rt-rs-client>
+        <version.cxf-rt-rs-extension-providers>3.3.4</version.cxf-rt-rs-extension-providers>
+        <version.yasson>1.0.5</version.yasson>
+        <version.jaxb-api>2.3.1</version.jaxb-api>
+        <version.openliberty.runtime>20.0.0.4</version.openliberty.runtime>
+        <version.liberty-maven-plugin>3.1</version.liberty-maven-plugin>
+        <version.maven-failsafe-plugin>2.22.2</version.maven-failsafe-plugin>
+        <version.maven-surefire-plugin>2.22.2</version.maven-surefire-plugin>
+        <version.maven-war-plugin>3.2.3</version.maven-war-plugin>
+        <version.gson>2.8.6</version.gson>
+        <version.junit-vintage-engine>5.5.2</version.junit-vintage-engine>
+        <version.jersey-test-framework>2.30.1</version.jersey-test-framework>
+        <version.junit-extensions>0.2.0-SNAPSHOT</version.junit-extensions>
+        <version.equalsverifier>3.1.13</version.equalsverifier>
+        <version.lombok>1.18.12</version.lombok>
+        <version.mapstruct>1.3.1.Final</version.mapstruct>
+
+        <!-- Dependencies -->
+        <vaadin.version>14.1.28</vaadin.version>
+
+        <drivers.dir>${project.basedir}/drivers</drivers.dir>
+        <drivers.downloader.phase>pre-integration-test</drivers.downloader.phase>
+    </properties>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>central</id>
+            <url>https://repo1.maven.org/maven2/</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
+
+    <repositories>
+        <repository>
+            <id>central</id>
+            <url>https://repo1.maven.org/maven2/</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <!-- Repository used by many Vaadin add-ons -->
+        <repository>
+            <id>Vaadin Directory</id>
+            <url>https://maven.vaadin.com/vaadin-addons</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-bom</artifactId>
+                <version>${vaadin.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <!-- Replace artifactId with vaadin-core to use only free components -->
+            <artifactId>vaadin</artifactId>
+            <exclusions>
+                <!-- Webjars are only needed when running in Vaadin 13 compatibility mode -->
+                <exclusion>
+                    <groupId>com.vaadin.webjar</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.webjars.bowergithub.insites</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.webjars.bowergithub.polymer</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.webjars.bowergithub.polymerelements</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.webjars.bowergithub.vaadin</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.webjars.bowergithub.webcomponents</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-cdi</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-api</artifactId>
+            <version>7.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Added to provide logging output as Flow uses -->
+        <!-- the unbound SLF4J no-operation (NOP) logger implementation -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-testbench</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>${artifactName}</finalName>
+        <plugins>
+            <!-- Enable liberty-maven plugin -->
+            <plugin>
+                <groupId>io.openliberty.tools</groupId>
+                <artifactId>liberty-maven-plugin</artifactId>
+                <version>${version.liberty-maven-plugin}</version>
+                <configuration>
+                    <assemblyArtifact>
+                        <groupId>io.openliberty</groupId>
+                        <artifactId>openliberty-runtime</artifactId>
+                        <!-- Don't forget to update the openliberty-docker-image version in the docker module too -->
+                        <version>${version.openliberty.runtime}</version>
+                        <type>zip</type>
+                    </assemblyArtifact>
+                    <serverName>${project.artifactId}_Server</serverName>
+                    <applications>${artifactName}</applications>
+                    <configDirectory>src/main/liberty/config</configDirectory>
+                    <include>minify,runnable</include>
+                    <skipLibertyPackage>true</skipLibertyPackage>
+                    <skipTestServer>true</skipTestServer>
+                    <serverEnvFile>src/main/liberty/config/dev.env</serverEnvFile>
+                    <looseApplication>false</looseApplication>
+                    <serverStartTimeout>120</serverStartTimeout>
+                    <verifyTimeout>120</verifyTimeout>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>${version.maven-war-plugin}</version>
+            </plugin>
+            <plugin>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-frontend</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <!-- Production mode is activated using -Pproduction -->
+            <id>production</id>
+            <properties>
+                <vaadin.productionMode>true</vaadin.productionMode>
+            </properties>
+
+            <dependencies>
+                <dependency>
+                    <groupId>com.vaadin</groupId>
+                    <artifactId>flow-server-production-mode</artifactId>
+                </dependency>
+            </dependencies>
+
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.vaadin</groupId>
+                        <artifactId>vaadin-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>build-frontend</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+</project>
