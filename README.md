@@ -7,6 +7,11 @@ Run application using
 mvn clean package liberty:run
 ```
 
+Use the dev mode if you want hot reload
+```
+mvn liberty:dev
+```
+
 Open [http://localhost:8080/dada](http://localhost:8080/dada) in browser.
 
 If you want to run your app locally in the production mode, run using
